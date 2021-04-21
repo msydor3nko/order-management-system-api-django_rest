@@ -37,10 +37,9 @@ class Order(models.Model):
 
 
 # class Invoice(models.Model):
-#     product_name = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
-#     product_price = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
-#     order_created_at = models.ForeignKey(Order, on_delete=models.DO_NOTHING)
+#     order = models.ForeignKey(Order, on_delete=models.DO_NOTHING)
+#     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
 #     created_at = models.DateTimeField(auto_now_add=True)
 #
 #     def __str__(self):
-#         return f'{self.pk} — {self.product_name}'
+#         return f'{self.pk}'

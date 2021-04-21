@@ -1,13 +1,6 @@
 from rest_framework import serializers
 
-from .models import Order, Product
-
-
-class ProductSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Product
-        fields = ('id', 'created_at', 'name', 'price', 'discount_price')
+from .models import Order
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -22,7 +15,11 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class InvoiceSerializer(serializers.ModelSerializer):
-    """
-    TODO: think about validations here
-    """
-    pass
+
+    order = OrderSerializer()
+    # order_date = None
+    # created_at = None
+
+    class Meta:
+        fields = '__all__'
+        # fields = ('product_name', 'product_price', 'product_discount_price', 'order_date', 'created_at')

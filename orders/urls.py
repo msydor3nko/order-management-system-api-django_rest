@@ -10,7 +10,6 @@ urlpatterns = [
     path('orders/<str:pk>/', OrderReadUpdate.as_view(), name='order_read-update'),
 
     path('orders/', OrdersList.as_view(), name='orders_list'),
-    # URL EXAMPLE: `/api/v1/orders/2020-01-01&2020-12-31`
     re_path('orders/(?P<start_date>\d{4}-\d{2}-\d{2})&(?P<end_date>\d{4}-\d{2}-\d{2})$',
             OrdersListPeriod.as_view(), name='orders_list'),
 

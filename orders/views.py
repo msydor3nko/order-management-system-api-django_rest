@@ -2,22 +2,27 @@ from rest_framework import generics
 from rest_framework import views
 from rest_framework.response import Response
 
-from .serializers import OrderSerializer, ProductSerializer
+from .serializers import OrderSerializer, InvoiceSerializer
 from .models import Order, Product
 
 
 class OrdersList(generics.ListAPIView):
-    """
-    Provides list of all orders (for accountant).
-    """
+    """List of all orders (accountant)."""
+
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
 class OrdersListPeriod(generics.ListAPIView):
     """
-    Provides list of orders for period (for accountant).
+    List of orders for period (accountant).
+
+    Examples
+        :url: `/api/v1/orders/2020-01-01&2020-12-31`
+        :start_date: `2020-01-01`
+        :end_date: `2020-12-31`
     """
+
     serializer_class = OrderSerializer
 
     def get_queryset(self):
@@ -28,27 +33,22 @@ class OrdersListPeriod(generics.ListAPIView):
 
 
 class OrderCreate(generics.CreateAPIView):
-    """
-    Provides order creation (for cashier).
-    TODO: validate payload in POST request: should be `Product` and `Order.status`
-    TODO: fix `405 Method Not Allowed` and order status must be `Created` only
-    """
+    """Create new order (cashier)."""
+
     serializer_class = OrderSerializer
+    # TODO: validate payload in POST request: should be `Product` and `Order.status`
+    # TODO: fix `405 Method Not Allowed` and order status must be `Created` only
 
 
 class OrderReadUpdate(generics.RetrieveUpdateAPIView):
-    """
-    Provides reading/updating single order status using `pk` (order `id`):
-    - order completing (for seller)
-    - order paying (for cashier)
-    TODO: only order status should be allowed for updating/patching
-    """
+    """Read/Update order status on `Completed` (seller) or `Payed` (cashier)."""
+
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    # TODO: only order status should be allowed for updating/patching
 
 
 class InvoiceGenerate(views.APIView):
-    """
-    Provides order invoice generating for cashier.
-    """
-    pass
+    """Generate invoice by order (cashier)."""
+
+    serializer_class = InvoiceSerializer
