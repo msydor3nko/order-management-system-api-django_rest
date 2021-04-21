@@ -1,23 +1,6 @@
 from django.db import models
 
-
-class Order(models.Model):
-
-    class OrderStatusChoices(models.TextChoices):
-        CREATED = 'Created'
-        COMPLETED = 'Completed'
-        PAYED = 'Payed'
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    product_id = models.ForeignKey('Product', on_delete=models.CASCADE)
-    status = models.CharField(
-        max_length=10,
-        choices=OrderStatusChoices.choices,
-        default=OrderStatusChoices.CREATED
-    )
-
-    def __str__(self):
-        return self.product.name
+from .services.discount import calculate_discount_price
 
 
 class Product(models.Model):
@@ -28,3 +11,24 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Order(models.Model):
+    """
+    TODO: add `discount_price` when order created
+    """
+    class StatusType(models.TextChoices):
+        CREATED = 'Created'
+        COMPLETED = 'Completed'
+        PAYED = 'Payed'
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    status = models.CharField(
+        max_length=10,
+        choices=StatusType.choices,
+        default=StatusType.CREATED
+    )
+
+    def __str__(self):
+        return f'{self.pk} — {self.product.name}'

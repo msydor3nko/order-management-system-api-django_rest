@@ -7,13 +7,13 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ('id', 'created_at', 'name', 'price',)
 
 
 class OrderSerializer(serializers.ModelSerializer):
-
-    # products = ProductSerializer()
-
+    """
+    TODO: add product details info in `product` field
+    """
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ('id', 'created_at', 'status', 'product',)
