@@ -18,16 +18,14 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    """
-    TODO: add `discount_price` when order created
-    """
+
     class StatusType(models.TextChoices):
         CREATED = 'Created'
         COMPLETED = 'Completed'
         PAYED = 'Payed'
 
     created_at = models.DateTimeField(auto_now_add=True)
-    product = models.ForeignKey(Product, related_name='orders', on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     status = models.CharField(
         max_length=10,
         choices=StatusType.choices,

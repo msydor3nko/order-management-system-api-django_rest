@@ -16,7 +16,7 @@ class OrdersList(generics.ListAPIView):
 
 class OrdersListPeriod(generics.ListAPIView):
     """
-    Provides order listing for period (for accountant).
+    Provides list of orders for period (for accountant).
     """
     serializer_class = OrderSerializer
 
@@ -29,7 +29,8 @@ class OrdersListPeriod(generics.ListAPIView):
 
 class OrderCreate(generics.CreateAPIView):
     """
-    Provides order creating for cashier.
+    Provides order creation (for cashier).
+    TODO: validate payload in POST request: should be `Product` and `Order.status`
     TODO: fix `405 Method Not Allowed` and order status must be `Created` only
     """
     serializer_class = OrderSerializer
@@ -38,8 +39,8 @@ class OrderCreate(generics.CreateAPIView):
 class OrderReadUpdate(generics.RetrieveUpdateAPIView):
     """
     Provides reading/updating single order status using `pk` (order `id`):
-    - completing (for seller)
-    - paying (for cashier)
+    - order completing (for seller)
+    - order paying (for cashier)
     TODO: only order status should be allowed for updating/patching
     """
     queryset = Order.objects.all()

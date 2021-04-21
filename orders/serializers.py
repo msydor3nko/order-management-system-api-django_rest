@@ -11,12 +11,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    """
-    TODO: add product details info in `product` field
-    """
+
+    product_name = serializers.ReadOnlyField(source='product.name')
+    product_price = serializers.ReadOnlyField(source='product.price')
+    product_discount_price = serializers.ReadOnlyField(source='product.discount_price')
+
     class Meta:
         model = Order
-        fields = ('id', 'created_at', 'status', 'product',)
+        fields = '__all__'
 
 
 class InvoiceSerializer(serializers.ModelSerializer):
