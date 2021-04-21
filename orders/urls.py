@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from django.urls import path, re_path, register_converter
+from django.urls import path, re_path
 
 from .views import (
     OrdersList, OrdersListPeriod, OrderCreate, OrderReadUpdate, InvoiceGenerate
