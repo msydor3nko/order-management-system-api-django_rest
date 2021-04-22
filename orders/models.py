@@ -56,6 +56,5 @@ class Invoice(models.Model):
     def order_date(self):
         return self.order.created_at
 
-
     def __str__(self):
         return f'{self.pk}'

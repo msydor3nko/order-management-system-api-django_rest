@@ -36,15 +36,15 @@ class OrderCreate(generics.CreateAPIView):
     """Create new order (cashier)."""
 
     serializer_class = OrderSerializer
-    # TODO: validate payload in POST request: should be `Product` and `Order.status` as `Created` only
 
 
 class OrderReadUpdate(generics.RetrieveUpdateAPIView):
     """Read/Update order status on `Completed` (seller) or `Payed` (cashier)."""
+    # TODO: separate seller/cashier permissions to order status updating
+    # TODO: restrict `product` updating – only `order status` should be patch
 
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    # TODO: only order status should be allowed for updating/patching
 
 
 class InvoiceGenerate(generics.ListCreateAPIView):
@@ -52,3 +52,7 @@ class InvoiceGenerate(generics.ListCreateAPIView):
 
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
+
+
+# TODO: restrict permission to views using `authentication_classes` field
+# TODO: think about validations adding

@@ -1,26 +1,57 @@
 # Order Management System API Guide
 
+The simple API for Order Management System in electronics store
+based on Django Rest Framework.
+
+
+## Local DevEnv Setup
+
+Clone the App repository using Git:
+
+`https://github.com/msydor3nko/order-management-system-api-django_rest`
+
+Create and setup virtual environment:
+
+`cd order-management-system-api-django_rest`  
+`python3 -m venv venv`  
+`source venv/bin/activate`
+
+Update Pip and install dependencies:
+
+`pip install -U pip`
+`pip install -r requirements.txt`
+
+
 ## Projet Setup
 
+Load products data from fixtures (orders also there):
+
+`python manage.py loaddata products.json`
+
+Make migrations:
+
+`python manage.py migrate`
+
 ---
 
-## Load products data from fixtures 
- `python manage.py loaddata products.json`
+## Run API
 
-## Create model fixtures from DB data
-`python manage.py dumpdata orders.Product > fixtures.json`
+`python manage.py runserver`
 
----
 
 ## Documentation
 
-### Swagger, ReDoc
 You can use Swagger or ReDoc to explore project endpoints:
 
-`http://127.0.0.1:8000/swagger/`  
+#### Swagger 
+`http://127.0.0.1:8000/swagger/`
+
+#### ReDoc
 `http://127.0.0.1:8000/redoc/`
 
-### Browsable API
-You can use Browsable API provided by Django Rest Framework to requests endpoints. Try to get order list, for example:
 
+## Browsable API
+You can use Browsable API provided by Django Rest Framework to requests endpoints.
+
+Try to get order list, for example:
 `http://127.0.0.1:8000/api/v1/orders/`
