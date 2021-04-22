@@ -13,7 +13,7 @@ urlpatterns = [
     re_path('orders/(?P<start_date>\d{4}-\d{2}-\d{2})&(?P<end_date>\d{4}-\d{2}-\d{2})$',
             OrdersListPeriod.as_view(), name='orders_list'),
 
-    path('invoice/<str:pk>/', InvoiceGenerate.as_view(), name='invoice_generate'),
+    path('invoice/', InvoiceGenerate.as_view(), name='invoice_generate'),
 ]
 
 

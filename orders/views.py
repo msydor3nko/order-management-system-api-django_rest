@@ -3,7 +3,7 @@ from rest_framework import views
 from rest_framework.response import Response
 
 from .serializers import OrderSerializer, InvoiceSerializer
-from .models import Order, Product
+from .models import Order, Invoice
 
 
 class OrdersList(generics.ListAPIView):
@@ -36,8 +36,7 @@ class OrderCreate(generics.CreateAPIView):
     """Create new order (cashier)."""
 
     serializer_class = OrderSerializer
-    # TODO: validate payload in POST request: should be `Product` and `Order.status`
-    # TODO: fix `405 Method Not Allowed` and order status must be `Created` only
+    # TODO: validate payload in POST request: should be `Product` and `Order.status` as `Created` only
 
 
 class OrderReadUpdate(generics.RetrieveUpdateAPIView):
@@ -48,7 +47,8 @@ class OrderReadUpdate(generics.RetrieveUpdateAPIView):
     # TODO: only order status should be allowed for updating/patching
 
 
-class InvoiceGenerate(views.APIView):
+class InvoiceGenerate(generics.ListCreateAPIView):
     """Generate invoice by order (cashier)."""
 
+    queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Order
+from .models import Order, Invoice
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -16,10 +16,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
 class InvoiceSerializer(serializers.ModelSerializer):
 
-    order = OrderSerializer()
-    # order_date = None
-    # created_at = None
-
     class Meta:
-        fields = '__all__'
-        # fields = ('product_name', 'product_price', 'product_discount_price', 'order_date', 'created_at')
+        model = Invoice
+        fields = ('order', 'order_date', 'product_name', 'product_price', 'product_discount_price', 'created_at')
