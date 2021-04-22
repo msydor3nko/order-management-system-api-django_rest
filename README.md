@@ -8,7 +8,7 @@ based on Django Rest Framework.
 
 Clone the App repository using Git:
 
-`https://github.com/msydor3nko/order-management-system-api-django_rest`
+`git clone https://github.com/msydor3nko/order-management-system-api-django_rest.git`
 
 Create and setup virtual environment:
 
@@ -18,25 +18,43 @@ Create and setup virtual environment:
 
 Update Pip and install dependencies:
 
-`pip install -U pip`
+`pip install -U pip`  
 `pip install -r requirements.txt`
 
 
 ## Projet Setup
 
-Load products data from fixtures (orders also there):
-
-`python manage.py loaddata products.json`
-
 Make migrations:
 
 `python manage.py migrate`
 
----
+
+Load products data from fixtures (orders.json also there):
+
+`python manage.py loaddata orders/fixtures/products.json`
+
+
+## Setup Django Admin
+
+Create superuser to use Django Admin (following console instructions):
+
+`python manage.py createsuperuser`
+
 
 ## Run API
 
 `python manage.py runserver`
+
+You can use Django Admin for managing products and orders:
+
+`http://127.0.0.1:8000/admin`
+
+
+## Browsable API
+You can use Browsable API provided by Django Rest Framework to requests endpoints.
+
+Try to get order list, for example:
+`http://127.0.0.1:8000/api/v1/orders/`
 
 
 ## Documentation
@@ -48,10 +66,3 @@ You can use Swagger or ReDoc to explore project endpoints:
 
 #### ReDoc
 `http://127.0.0.1:8000/redoc/`
-
-
-## Browsable API
-You can use Browsable API provided by Django Rest Framework to requests endpoints.
-
-Try to get order list, for example:
-`http://127.0.0.1:8000/api/v1/orders/`
